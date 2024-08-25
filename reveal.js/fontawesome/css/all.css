@@ -7148,7 +7148,6 @@ readers do not read off random characters that represent icons */
   content: "\f1ed"; }
 
 .fa-gitlab:before {
-  color: #fc6d26;
   content: "\f296"; }
 
 .fa-typo3:before {
