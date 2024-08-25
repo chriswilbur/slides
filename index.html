@@ -1,626 +1,660 @@
 <!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💻 DevSecOps & CI/CD</title>
 
-  <title>🚀 Domain Manager</title>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/dracula.css">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <style>
+      .reveal i.fa {
+        font-family: FontAwesome;
+        font-style: normal;
+      }
+    </style>
 
-  <link rel="stylesheet" href="dist/reset.css">
-  <link rel="stylesheet" href="dist/reveal.css">
-  <link rel="stylesheet" href="dist/theme/dracula.css">
-  <link rel="stylesheet" href="fontawesome/css/all.css">
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css">
+    </head>
+<!-- Custom styling -->
+<style>
+  /* Fragment blur animation */
+  .fragment.blur {
+    filter: blur(7px);
+  }
 
-  <!-- Theme used for syntax highlighted code -->
-  <link rel="stylesheet" href="plugin/highlight/zenburn.css">
-  
-  <!-- Custom styling -->
-  <style>
-    .reveal i.fa {
-      font-family: FontAwesome;
-      font-style: normal;
-    }
-  
-    /* Fragment blur animation */
-    .fragment.blur {
-      filter: blur(7px);
-    }
-  
-    .fragment.blur.visible {
-      filter: none;
-    }
-  
-    /* External link icon */
-    .ext {
-      height: 14px;
-      padding-left: 4px;
-    }
-  
-    pre code.smaller {
-      font-size: 14px;
-      line-height: 1.5;
-    }
-  
-    .reveal h4,
-    .reveal h5 {
-      text-transform: none;
-    }
-  
-    .reveal section pre code {
-      font-size: 14px !important;
-      line-height: 1.5 !important;
-    }
-  </style>
-  </head>
+  .fragment.blur.visible {
+    filter: none;
+  }
 
-<body>
-  <div class="reveal">
-    <div class="slides">
-<section> <!-- Title slide -->
-  <h2>Domain Manager</h2>
-  <p><small>Presented by <a href="mailto:christopher.a.wilbur@lmco.com">Chris Wilbur</a>, <a
-        href="mailto:zacharia.alaoui@lmco.com">Zach Alaoui</a>, and <a href="mailto:nathan.novick@lmco.com">Nathan
-        Novick</a></small></p>
+  /* External link icon */
+  .ext {
+    height: 14px;
+    padding-left: 4px;
+  }
+</style>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+<!-- Title slide -->
+<section>
+  <h2>DevSecOps & CI/CD</h2>
+  <p><small>Presented by <a href="mailto:nathan.novick@lmco.com">Nathan Novick</a></small></p>
+  <aside class="notes">
+    <ul>
+      <li>This presentation will cover the basics of DevSecOps and CI/CD</li>
+      <li>Geared towards both new and experienced SW engineers that aren't familiar with DSO lifecycle</li>
+      <li>Emphasis on GitLab</li>
+    </ul>
+  </aside>
 </section>
 
-<section> <!-- Agenda -->
+<!-- Agenda -->
+<section>
   <h2>Agenda</h2>
   <ul>
-    <li class="fragment fade-in-then-semi-out">WOSA</li>
-    <li class="fragment fade-in-then-semi-out">Domain Manager</li>
-    <li class="fragment fade-in-then-semi-out">Domain Plugin System</li>
-    <li class="fragment fade-in-then-semi-out">Domain Factory</li>
-    <li class="fragment fade-in-then-semi-out">Code Walkthrough</li>
-    <li class="fragment fade-in-then-semi-out">Resources</li>
+    <li class="fragment custom blur">DevSecOps concepts</li>
+    <li class="fragment custom blur"><i style="color: #fc6d26" class="fa-brands fa-gitlab fa-sm"></i> GitLab features
+    </li>
+    <li class="fragment custom blur">CI/CD pipelines</li>
+    <li class="fragment custom blur">Lockheed Martin resources</li>
+    <li class="fragment custom blur">Examples</li>
   </ul>
+  <aside class="notes">
+    <ul>
+      <li>Start by going through some concepts and definitions</li>
+      <li>Review GitLab features and capabilities (high level)</li>
+      <li>Intro to pipelines so you can see their benefits</li>
+      <li>We can look at some LM specific DSO content and resources</li>
+      <li>A couple examples and can do code walkthroughs</li>
+    </ul>
+  </aside>
 </section>
 
-<section> <!-- BEGIN WOSA Section -->
+<section> <!-- BEGIN DevSecOps vertical section -->
+  <!--  DevOps vs. DevSecOps (auto-animate) -->
+  <section data-auto-animate>
+    <h2>
+      <div data-id="dev" style="display: inline-block;">Dev</div>
+      <div data-id="ops" style="display: inline-block;">Ops</div>
+    </h2>
+    <p>Software <strong>dev</strong>elopment + <strong>op</strong>eration<strong>s</strong></p>
+    <div class="fragment">
+      <ul>
+        <li>Automation</li>
+        <li>Collaboration</li>
+        <li>Fast feedback</li>
+        <li>Iterative improvement</li>
+      </ul>
+    </div>
+    <aside class="notes">
+      <ul>
+        <li>DevOps is a software engineering <strong>methodology</strong> that combines software development and
+          operations</li>
+        <li>Through the use of automation, ...</li>
+        <li>Operations: typically responsible for infrastructure, integration, deployment, patching. In our DSO
+          examples, Ops is addressed by things like virtualization and containerization (more later)</li>
+      </ul>
+    </aside>
+  </section>
+  <section data-auto-animate>
+    <h2>
+      <div data-id="dev" style="display: inline-block;">Dev</div>
+      <div style="display: inline-block; color: var(--r-bold-color);">Sec</div>
+      <div data-id="ops" style="display: inline-block;">Ops</div>
+    </h2>
+    <p>Shifting <strong>sec</strong>urity "to the left"</p>
+    <div class="fragment">
+      <ul>
+        <li>Static application security testing (SAST)</li>
+        <li>Dynamic application security testing (DAST)</li>
+        <li>Container and dependency vulnerability scanning</li>
+      </ul>
+    </div>
+    <aside class="notes">
+      <ul>
+        <li>DevOps with the additional focus of making security a priority</li>
+        <li>"To the left" means finding security issues earlier in the product lifecycle</li>
+        <li>The terms <strong>DevSecOps</strong> and <strong>DevOps</strong> tend to be used interchangeably</li>
+        <li>Here are a few ways we can implement security in DSO</li>
+        <li>SAST: analyzes source code to find security vulnerabilities</li>
+        <li>DAST: identifies security vulnerabilities during runtime</li>
+        <li>Container/dependency scanning: checks images + installed sw for vulnerabilities</li>
+      </ul>
+    </aside>
+  </section>
+
+</section> <!-- END DevSecOps vertical section -->
+
+<section> <!-- BEGIN CI/CD vertical section -->
+  <!-- CI/CD (auto-animate) -->
+  <section data-auto-animate data-auto-animate-id="cicd" data-auto-animate-restart>
+    <h2>CI/CD</h2>
+    <aside class="notes">
+      <ul>
+        <li>CI/CD <strong>falls under</strong> DevSecOps and is made up of 2 parts, let's look at the first part...</li>
+      </ul>
+    </aside>
+  </section>
+  <section data-auto-animate data-auto-animate-id="cicd">
+    <h2>
+      <div style="display: inline-block; color: var(--r-bold-color);">CI</div>/CD
+    </h2>
+    <strong>Continuous Integration</strong>
+    <p>Automated build, test, and analysis</p>
+    <aside class="notes">
+      <ul>
+        <li>The first part is Continous Integration, it consists of steps such as</li>
+        <li>Automated build, test, and analysis</li>
+      </ul>
+    </aside>
+  </section>
+  <section data-auto-animate data-auto-animate-id="cicd">
+    <h2>CI/<div style="display: inline-block; color: var(--r-bold-color);">CD</h2>
+    <strong>Continuous Delivery</strong>
+    <p>Automated packaging, versioning, and release</p>
+    <aside class="notes">
+      <ul>
+        <li>The second part is Continous Delivery, it consists of...</li>
+        <li>CD can stand for both Continuous Delivery or Continuous Deployment.</li>
+        <li>I used Delivery here since deployment tends to imply web applications, with most LM programs delivery makes
+          more sense</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- CI/CD uses -->
   <section>
-    <h2>WOSA</h2>
+    <h2>CI/CD use cases</h2>
     <ul>
-      <li class="fragment fade-in-then-semi-out">Developed and maintained by Air Force Research Laboratory (AFRL)</li>
-      <li class="fragment fade-in-then-semi-out">Defined by <a
-          href="https://mfc-conf-prd.us.lmco.com:8443/display/WOSA/WOSA+ICDs" data-preview-link>WOSA Interface Control
-          Documents (ICD)</a></li>
-      <li class="fragment fade-in-then-semi-out">Framework that enables <strong>Open Architecture</strong></li>
-      <li class="fragment fade-in-then-semi-out">Attempts to increase <strong>code reuse</strong></li>
+      <li class="fragment fade-in-then-semi-out">Automate <em>software builds</em> in various configurations</li>
+      <li class="fragment fade-in-then-semi-out">Execute automated <em>unit tests</em> and provide reports</li>
+      <li class="fragment fade-in-then-semi-out">Scan and detect <em>vulnerabilities</em> and <em>memory leaks</em></li>
+      <li class="fragment fade-in-then-semi-out">Enforce <em>best practices</em> and coding standards</li>
+      <li class="fragment fade-in-then-semi-out">Create deliverable <em>packages</em> and upload artifacts</li>
+      <li class="fragment fade-in-then-semi-out">Generate and publish API <em>documentation</em></li>
     </ul>
-
     <aside class="notes">
       <ul>
-        <li>What is WOSA and where'd it come from? </li>
-        <li>AFRL's attempt to implement OA </li>
-        <li>Open Architecture = computer or software architecture created using open standards </li>
-        <li>Openness refers to use of interface standards that are freely available </li>
-        <ul>
-          <li>...think MS Windows and linux vs Apple OS.</li>
-        </ul>
-        <li>OA is based on open standards that are easy to implement and modify </li>
-        <li>simplifies the addition and modification of the various parts of the whole.</li>
-        <li>...which leads us to WOSA Domains.</li>
+        <li>Software builds: debug/release, different C++ standards, different compilers and versions,
+          SIMULATION=ON/OFF...</li>
+        <li>Unit tests: xml reports to be passed to other tools (GitLab)</li>
+        <li>Scan for vunlnerabilities, using the SAST and DAST tools we talked about</li>
+        <li>Best practices: can format code on the fly if you wish, or provide an error report</li>
+        <li>Packages: debian, rpm, conan. Upload to Nexus, GitLab.</li>
+        <li>Documentation: can use various documentation frameworks and publish to web (more later)</li>
       </ul>
     </aside>
   </section>
+</section> <!-- END CI/CD vertical section -->
 
-  <section> <!-- BEGIN WOSA Domain Section -->
-    <h2>WOSA Domains</h2>
-    <ul>
-      <li class="fragment fade-in-then-semi-out">Modular & Consumable Components</li>
-      <li class="fragment fade-in-then-semi-out">Built as stand alone libraries</li>
-      <li class="fragment fade-in-then-semi-out">Executables for each Domain</li>
-      <li class="fragment fade-in-then-semi-out">Users can link multiple Domains (IFS or OFP)</li>
-      <li class="fragment fade-in-then-semi-out">Moving towards an <strong>Open Architecture</strong></li>
-    </ul>
+<section> <!-- BEGIN GitLab overview vertical section -->
+  <!-- GitLab features overview -->
+  <section data-auto-animate> <!-- Just the header image -->
+    <div> <img src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png"
+        style="width: 400px;  background: transparent; margin: -100px 0 -50px 0;"> </div>
     <aside class="notes">
       <ul>
-        <li>Modular & Consumable Components : WOSA breaks architecture into logical domains (i.e. MDB, ADS, AFC, GAN,
-          IMU)</li>
-        <li><small>we'll discuss libaries later</small></li>
-        <ul>
-          <li>Recall that OA is all about REUSE i.e. simplifying the addition, upgrade, and replacement of the various
-            parts/domains</li>
-        </ul>
-        <li>The point here is that with domains we are increasing our code reuse, modularity and moving towards OA</li>
-        <li>... however, we need a way to <strong>manage</strong> all of this modularity</li>
+        <li>You may already be familiar with GitLab, but let's take a look at some important features (some you may not
+          have realized exist).</li>
       </ul>
     </aside>
-  </section> <!-- END WOSA Domain Section -->
-
-</section> <!-- END WOSA Section -->
-
-<section> <!-- BEGIN Domain Manager Section -->
-
-  <section>
-    <h2>Domain Manager</h2>
-    <ul>
-      <li class="fragment fade-in-then-semi-out">Manages all domains present in the system</li>
-      <li class="fragment fade-in-then-semi-out">Configurable via JSON file</li>
-      <li class="fragment fade-in-then-semi-out">Uses the <strong>MDBManager</strong> to :</li>
-      <ul>
-        <li class="fragment fade-in-then-semi-out">Configure & retrieve all MDB Domain Objects for the system</li>
-        <li class="fragment fade-in-then-semi-out">Retrieve the applicable MDB Interface slated for each configured
-          domain instance </li>
-      </ul>
-      <li class="fragment fade-in-then-semi-out">Optionally uses the <strong>DynamicPluginManager</strong> to load all
-        domain plugins.</li>
-    </ul>
+  </section>
+  <section data-auto-animate> <!-- The header image plus caption -->
+    <div> <img src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png"
+        style="width: 400px;  background: transparent; margin: -100px 0 -50px 0;"> </div>
+    <p>Project features</p>
     <aside class="notes">
       <ul>
-        <li>The domain manager is in charge for managing the domains present in the system.</li>
-        <li>It uses the MDB_Manger to manage the different MDB domains in the system</li>
-        <li>It uses the Domain Factory to create the desired individual Domains</li>
-        <li>Domain Manager is Configurable.</li>
-        <li>It uses the <strong>Dynamic_Plugin_Manger</strong> to load all the plugins.</li>
-        <ul>
-          <li><small><strong>*** Not implemented in the WOSA Framework example **</strong></small></li>
-        </ul>
+        <li>Many GitLab features you use are at the project-level, here are some of them</li>
       </ul>
     </aside>
   </section>
-
-  <section> <!-- Begin Plugin System Section-->
-    <h2>Domain Plugin System</h2>
-    <ul>
-      <li class="fragment fade-in">Domains can be implemented as <em>shared libraries</em>
-        <ul class="fragment fade-in-then-out">
-          <li>Allows exchanging domains without recompiling/relinking</li>
-        </ul>
-      </li>
-
-      <li class="fragment fade-in">Domain plugins are specified in the Domain Manager <em>config file</em>
-        <ul class="fragment fade-in-then-out">
-          <li>Stored in a <code>domain_plugins</code> JSON object</li>
-        </ul>
-      </li>
-
-      <li class="fragment fade-in">The <code>DynamicPluginManager</code> loads domain plugins at <em>runtime</em>
-        <ul class="fragment fade-in-then-out">
-          <li>Dyanmic linking using <code>.dll</code> or <code>.so</code> files</li>
-        </ul>
-      </li>
-
-      <li class="fragment">Plugins must adhere to the <a
-          href="https://gitlab.us.lmco.com/hub/incubator/mra/modules/arise-msw-utilities/-/blob/develop/src/dynamic-plugin/include/arise/msw/dynamic_plugin_api.h?ref_type=heads">DynamicPluginAPI</a>
-      </li>
-      <ul class="fragment fade-in-then-out">
-        <li>Defines <em>initialization</em> and <em>finalization</em> of a plugin</li>
-      </ul>
-
-    </ul>
-
+  <section data-auto-animate> <!-- The header image plus caption/screenshot -->
+    <div> <img src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png"
+        style="width: 400px;  background: transparent; margin: -100px 0 -50px 0;"> </div>
+    <div class="r-stack">
+      <div class="fragment fade-in-then-out">
+        <p>Project issues</p>
+        <img style="width: 800px" src="https://about.gitlab.com/images/press/screenshots/issue-board.png">
+      </div>
+      <div class="fragment fade-in-then-out">
+        <p>Project merge requests</p>
+        <img style="width: 800px" src="https://about.gitlab.com/images/press/screenshots/merge-request.png">
+      </div>
+      <div class="fragment fade-in-then-out">
+        <p>Merge request diffs</p>
+        <img style="width: 800px" src="https://about.gitlab.com/images/press/screenshots/diff-view.png">
+      </div>
+      <div class="fragment fade-in-then-out">
+        <p>CI/CD pipelines</p>
+        <img style="width: 800px" src="https://about.gitlab.com/images/press/screenshots/pipeline-graph.png">
+      </div>
+    </div>
     <aside class="notes">
       <ul>
-        <li>The Domain Plugin System provides resources needed to support dynamically pluggable domain objects by
-          utilizing shared libraries</li>
-        <li>Domains loaded into the Domain Manager are specified in the config file, either explicitly or as external
-          libraries</li>
-        <li>When domain plugins are specified in the config file, the DomainManager uses the DynamicPluginManager to
-          load them at runtime (dynamic linking),
-          rather than statically linking at compile time</li>
-        <li>The DynamicPluginAPI describes how to design a domain plugin to be compatible with the Domain Manager</li>
-      </ul>
-    </aside>
-  </section> <!-- End Plugin System Section-->
-
-</section> <!-- End Domain Manager Section -->
-
-<section> <!-- BEGIN Domain Factory Section -->
-
-  <section>
-    <h2>Domain Factory</h2>
-    <ul>
-      <li class="fragment fade-in-then-semi-out">What is the Domain Factory?</li>
-      <li class="fragment fade-in-then-semi-out">How does the Domain Factory create domains?</li>
-      <li class="fragment fade-in-then-semi-out">What type of design pattern does the Domain Factory use?</li>
-      <aside class="notes">
-        <ul><small>
-            <li>The DomainFactory :</li>
-            <ul>
-              <li>"is-a" <strong>arise::msw::singleton</strong> class that is used and shared by all processes (plugin
-                libraries and the main executable)</li>
-              <ul>
-                <li>all processes means anything that is running in the software will have access to this one
-                  DomainFactory</li>
-                <li>"is-a" means that DomainFactory inherits (is a type of, or 'is-a') singleton</li>
-                <li>singleton means that there can only be one within the system and it is shared by ALL</li>
-              </ul>
-              <li>is used to create individual domains with the assistance of the ClassFactory.</li>
-              <li>allows external entities to use the factory, and to register with the factory or to create a
-                registered derived Domain_Object</li>
-              <li>uses the assistance of the Class Factory utility template class</li>
-
-              <li>Possible question if we have time: The Singleton utility was used as opposed to straight statics so
-                that it can be properly handled within the IFS (SimulationSingleton)</li>
-            </ul>
-            <li>The Class Factory :</li>
-            <ul>
-              <li>allows you to register and unregister the named factory from the map of factory types during runtime.
-              </li>
-              <li>provides a generic extensible factory for objects with a variable amount of function arguments.</li>
-            </ul>
-            <li>It uses a singleton design pattern which allows you to create one global Factory.</li>
-          </small></ul>
-  </section>
-
-  <section>
-    <h2>Register Domain</h2>
-    <p>main.cpp</p>
-    <pre><code class="hljs cpp" data-ln-start-from="189" data-trim data-line-numbers><script type="text/template">
-            //The following is to demonstrate that domains can be statically linked
-            //and don't have to be compiled as separate loadable library plugins
-            //[Note] DomainFactory::Instance() creates a singleton of the DomainFactoryType
-            arise::msw::DomainFactory::Instance().RegisterType< IntegrationDomainApp >(
-              "Sample Static Domain");
-            </script></code></pre>
-    <aside class="notes">
-      <ul>
-        <li>I want to give a brief introduction to this piece of code, which register's a domain</li>
-        <li>In this piece of code we create an instance which creates a singleton and it registers a
-          IntegrationDomainApp</li>
-        <li>And it also passes the domain key which is Sample static Domain.</li>
-        <li>*The registerType function returns true if the insertion of the derived type was inserted to our map</li>
+        <li>Features you may or may not have heard of within GitLab</li>
+        <li>Issue boards viewable as kanban or scrum boards</li>
+        <li>MRs where you can propose a change and collaborate on reviews</li>
+        <li>CI/CD pipelines which is where the automation comes in (more later)</li>
       </ul>
     </aside>
   </section>
 
-  <section>
-    <h2>Create Domain</h2>
-    <p>domain_manager.cpp</p>
-    <pre><code class="hljs cpp" data-ln-start-from="158" data-trim data-line-numbers><script type="text/template">
-            // All plugins self-register themselves with the Domain Factory. Let's use
-            // the Domain_Factory to create the desired individual domains.
-            std::shared_ptr< wosa_api::Domain_API > obj(DomainFactory::Instance().Create(
-              di_info.registration_key_, domain_identifier, mdb_api, domain_config, nullptr, nullptr));
-            </script></code></pre>
-    <aside class="notes">
-      <ul>
-        <li>In this piece of code we have a DOMAIN_API pointer called obj, and we have an instance() of the
-          DomainFactory</li>
-        <li>We then have a create function which passes the name associated with the factory. </li>
-        <li>Here we create all the domains, for the JSON File</li>
-        <li>obj grabs the instance that was created in the previous slide, use the create function that grabs the
-          IntegrationDomainApp constructor to make a domain</li>
-        <li>obj is going to be a pointer to that domain</li>
-      </ul>
-    </aside>
-  </section>
-
-  <section>
-    <h4>Domain Factory</h4>
-    <pre><code class="hljs cpp" data-ln-start-from="189" data-trim data-line-numbers="|4|"><script type="text/template">
-            //The following is to demonstrate that domains can be statically linked
-            //and don't have to be compiled as separate loadable library plugins
-            //[Note] DomainFactory::Instance() creates a singleton of the DomainFactoryType
-            arise::msw::DomainFactory::Instance().RegisterType< IntegrationDomainApp >("Sample Static Domain");
-            </script></code></pre>
-    <pre><code class="hljs cpp" data-ln-start-from="158" data-trim data-line-numbers="|3-4|"><script type="text/template">
-          // All plugins self-register themselves with the Domain Factory. Let's use
-          // the Domain_Factory to create the desired individual domains.
-          std::shared_ptr< wosa_api::Domain_API > obj(DomainFactory::Instance().Create(
-            di_info.registration_key_, domain_identifier, mdb_api, domain_config, nullptr, nullptr));
-          </script></code></pre>
-    <pre><code class="hljs cpp" data-ln-start-from="115" data-trim data-line-numbers="|1|3|4|6|"><script type="text/template">
-            std::unique_ptr< T > Create(std::string name, CArgs... args)
-            {
-              auto it = funcs_container_.find(name);
-              if (it != funcs_container_.end())
-              {
-                return it->second(std::forward< CArgs >(args)...);
-              }
-              return nullptr;
-            }
-          </script></code></pre>
-    <aside class="notes">
-      <ul>
-        <li>Behind the scenes</li>
-        <ul>
-          <li>in ClassFactory, Create() takes in 2 params: name/key and paramareters group</li>
-          <li>and then searches through a DomainFactory's funcs_container_ for the key ("Sample Static Domain")</li>
-          <li>if key is found: returns a pointer to the IntegrationDomainApp created</li>
-          <li>else return a nullptr</li>
-        </ul>
-      </ul>
-    </aside>
-  </section>
-
-</section> <!-- End Domain Factory Section -->
-
-<section> <!-- BEGIN Code Walkthrough Section -->
-
-  <section>
-    <h2>Code walk through</h2>
-    <ul>
-      <li class="fragment fade-in-then-semi-out">JSON Config File</li>
-      <li class="fragment fade-in-then-semi-out">MDB Manager</li>
-      <li class="fragment fade-in-then-semi-out">Domain Manager</li>
-      <li class="fragment fade-in-then-semi-out">Execution</li>
-    </ul>
-  </section>
-
-  <!-- Parsing of the JSON Config File -->
-  <section>
-    <p>Parse the JSON Config File</p>
-    <pre><code class="hljs cpp" data-ln-start-from="194" data-trim data-line-numbers="|1-2|4-5|7|9-10"><script type="text/template">
-            // Set port-driver pointer to parse JSON Config file
-            std::shared_ptr< arise::msw::Port > domain_config_file_port = std::make_shared< arise::msw::MultiFileDriver >("Domain config port");
-
-            // Parse Domain Management input file
-            arise::msw::DomainConfigInitJSON config_init(domain_config_file_port.get(), input_folder, input_filename);
-
-            if (!config_init.IsDomainMgmtConfigValid())
-            {
-              std::cout << "Unable to retrieve Domain Mgmt Config File info" << std::endl;
-              return -1;
-            }
-          </script></code></pre>
-    <aside class="notes">
-      <p>Our exuctable starts with parsing the config file</p>
-      <ol>
-        <li>Set port/driver pointer </li>
-        <li>Create the DomainConfigInitJSON config object and parse the JSON Config file </li>
-        <li>verify the validity of the config object </li>
-        <li>JSON Poperties : "file_version", "mdb_configuration_filenames", "domain_plugins", "domain_instances",
-          "execution_groups" </li>
-      </ol>
-    </aside>
-  </section>
-
-  <section data-markdown="../src/json_config.md"></section>
-
-  <!-- Create and configure the MDB Manager -->
-  <section>
-    <p>Create and configure the MDB Manager</p>
-    <pre><code class="hljs cpp" data-ln-start-from="206" data-trim data-line-numbers="|1-2|4-5"><script type="text/template">
-            // Create the concrete MDB Manager
-            std::shared_ptr< arise::msw::MDBManager > mdb_manager = std::make_shared< NullMDBManager >();
-
-            // Retrieve the MDB configuration filename(s) and use the MDB Manager to parse it
-            std::vector< std::string > const &mdb_config_filenames = config_init.GetMdbConfigFileNames();
-            if (!mdb_config_filenames.empty())
-            {
-              std::shared_ptr< arise::msw::Port > mdb_config_file_port =
-                std::make_shared< arise::msw::MultiFileDriver >("MDB config port");
-              arise::msw::MDBManager::FilePortsList file_ports_list;
-              std::transform(mdb_config_filenames.begin(),
-                            mdb_config_filenames.end(),
-                            std::back_inserter(file_ports_list),
-                            [&](const std::string &file)
-                            { return std::make_pair(mdb_config_file_port, file); });
-              if (!mdb_manager->Configure(file_ports_list))
-              {
-                std::cout << "MDB Manager Failed to parse MDB File(s)" << std::endl;
-              }
-            }
-        </script></code></pre>
-    <aside class="notes">
-      <p>Now that we have the json file parsed and the new config object, we need to create the MDB Manager</p>
-      <ol>
-        <li>Creates the MDB Manager object.. null for this example </li>
-        <li>get MDB Config names </li>
-      </ol>
-    </aside>
-  </section>
-
-  <section>
-    <p>getting the MDB config names</p>
-    <pre><code class="hljs json" data-ln-start-from="2" data-trim data-line-numbers="2-5 "><script type="text/template">
-            "file_version" : "1.0.0",
-            "mdb_configuration_filenames" : [
-              "not_used_in_this_example_1.json",
-              "not_used_in_this_example_2.json"
-            ],
-            "domain_plugins": [ {} ],
-            "domain_instances": [
-              { "domain_name": "Sample Domain #1", "domain_id": "0xC4", "instance_id": 1, "element_id": 1,
-                "tdp_filename": "../INPUT_DATA/tdp_file_sample_domain.txt",
-                "connecting_mdb_instance_id": 1, "connecting_mdb_element_id": 1,
-                "factory_registration_key": "Sample Static Domain"
-              },
-          </script></code></pre>
-    <aside class="notes">
-      <p>mdb config files are used to configure the MDBs</p>
-    </aside>
-  </section>
-
-  <section>
-    <p>Create and configure the MDB Manager</p>
-    <pre><code class="hljs cpp" data-ln-start-from="206" data-trim data-line-numbers="4-5|8-9|10|11-15 "><script type="text/template">
-            // Create the concrete MDB Manager
-            std::shared_ptr< arise::msw::MDBManager > mdb_manager = std::make_shared< NullMDBManager >();
-
-            // Retrieve the MDB configuration filename(s) and use the MDB Manager to parse it
-            std::vector< std::string > const &mdb_config_filenames = config_init.GetMdbConfigFileNames();
-            if (!mdb_config_filenames.empty())
-            {
-              std::shared_ptr< arise::msw::Port > mdb_config_file_port =
-                std::make_shared< arise::msw::MultiFileDriver >("MDB config port");
-              arise::msw::MDBManager::FilePortsList file_ports_list;
-              std::transform(mdb_config_filenames.begin(),
-                            mdb_config_filenames.end(),
-                            std::back_inserter(file_ports_list),
-                            [&](const std::string &file)
-                            { return std::make_pair(mdb_config_file_port, file); });
-              if (!mdb_manager->Configure(file_ports_list))
-              {
-                std::cout << "MDB Manager Failed to parse MDB File(s)" << std::endl;
-              }
-            }
-        </script></code></pre>
-    <aside class="notes">
-      <ol start="3">
-        <li>Now that we have the mdb_config_filenames, </li>
-        <li>need to get & set port drivers for the MDB and associated domains (MultiFileDriver, for this example)</li>
-        <li>transform creates a list of pairs (mdb_config_filenames, file_port)</li>
-        <li>then uses that list of pairs to configure the mdb_manager</li>
-      </ol>
-    </aside>
-  </section>
-
-  <!-- Create the Domain Manager -->
-  <section>
-    <p>Domain Manager - Creation </p>
-    <pre><code class="hljs cpp" data-ln-start-from="227" data-trim data-line-numbers="1-2|4-5 "><script type="text/template">
-            // Create the Domain Manager
-            arise::msw::DomainManager domain_manager(mdb_manager);
-
-            // Initialize the Domain Manager
-            domain_manager.Initialize(config_init);
-          </script></code></pre>
-    <pre><code class="hljs cpp" data-ln-start-from="62" data-trim data-line-numbers><script type="text/template">
-            /**
-             * @brief DomainManager constructor.
-             *
-             * @param[in] mdb_mgr is the helper class used for retrieval of MDB
-             * interfaces used by Domains and the WOSA MDB domain(s) themselves
-             * @param[in] plugin_mgr provides the ability to install dynamic linked
-             * domain libraries
-             */
-            explicit DomainManager(std::shared_ptr< MDBManager > mdb_mgr,
-                                   std::shared_ptr< DynamicPluginManager > plugin_mgr = nullptr);
-          </script></code></pre>
-    <aside class="notes">
-      <ul>
-        <li>Now that we have MDB Manager configured</li>
-        <li>We create an unitialized domain_manager with said MDB_Manger</li>
-        <li>Notice that in the second window, the DM constructor sets default plugin mgr to nullptr</li>
-        <li>Then, back in the first window, once the domain manager has been created, we initialize it</li>
-      </ul>
-    </aside>
-  </section>
-
-  <section data-markdown="../src/dmn_mgr_Initialize.md"></section>
-
-  <section>
-    <p>Domain Manager Using ClassFactory</p>
-    <pre><code class="hljs cpp" data-ln-start-from="158" data-trim data-line-numbers><script type="text/template">
-            // All plugins self-register themselves with the Domain Factory. Let's use
-            // the Domain_Factory to create the desired individual domains.
-            std::shared_ptr< wosa_api::Domain_API > obj(DomainFactory::Instance().Create(
-              di_info.registration_key_, domain_identifier, mdb_api, domain_config, nullptr, nullptr));
-            </script></code></pre>
-    <pre><code class="hljs cpp" data-ln-start-from="73" data-trim data-line-numbers><script type="text/template">
-            /**
-                * @brief The Create function will create an instance based on the named type in the factory
-                * @param[in] name is the name associated with the factory
-                * @param[in] args is a list of arguments associated with the constructor of the factory typd
-                * @retval pointer to the created instance for the class template parameter type if successful
-                * @retval nullptr otherwise
-                */
-              std::unique_ptr< T > Create(std::string name, CArgs... args)
-              {
-                auto it = funcs_container_.find(name);
-                if (it != funcs_container_.end())
-                {
-                  return it->second(std::forward< CArgs >(args)...);
-                }
-                return nullptr;
-              }
-            </script></code></pre>
-    <aside class="notes">
-      <ul>
-        <li>Dmn Mgr calls DomainFactory singleton which is a ClassFactory object.</li>
-        <li>Create function in the ClassFactory recieves the string, name, and a list of arguments</li>
-        <ul>
-          <li>name = di_info.registration_key_ = Sample Static Domain</li>
-          <li>and it->second = IntegrationDomainApp constructor function</li>
-        </ul>
-      </ul>
-    </aside>
-  </section>
-
-  <section data-markdown="../src/main-IntegrationDomainApp.md"></section>
-
-  <section data-markdown="../src/dmn_mgr_Initialize_2.md"></section>
-
-  <section data-markdown="../src/dmn_mgr_addDomain.md"></section>
-
-  <section data-markdown="../src/dm-Executes.md"></section>
-
-  <section data-markdown="../src/main-executes.md"></section>
-
-  <section>
-    <h2>Walkthrough</h2>
-    <p><a
-        href="https://gitlab.us.lmco.com/-/ide/project/hub/incubator/mra/modules/arise-msw-wosa/edit/develop/-/src/wosa-domain-manager/examples/01-domain-manager/main.cpp"
-        data-preview-link>Click to use the GitLab web-based IDE</a></p>
-  </section>
-
-</section> <!-- End Code Walkthrough Section -->
-
-<section> <!-- BEGIN External Walkthrough Slide -->
-  <h2>GitLab Walkthrough</h2>
-  <li><a
-      href="https://gitlab.us.lmco.com/-/ide/project/hub/incubator/mra/modules/arise-msw-wosa/edit/develop/-/src/wosa-domain-manager/examples/01-domain-manager/main.cpp"
-      data-preview-link>Click to start code walkthrough</a></li>
-</section> <!-- END Code External Walkthrough Slide -->
-
-<section>
-  <h2>Recap</h2>
-  <ul>
-    <li class="fragment fade-in-then-semi-out">WOSA</li>
-    <li class="fragment fade-in-then-semi-out">Domain Manager</li>
-    <li class="fragment fade-in-then-semi-out">Domain Plugin System</li>
-    <li class="fragment fade-in-then-semi-out">Domain Factory</li>
-    <li class="fragment fade-in-then-semi-out">Code Walkthrough</li>
-  </ul>
-</section>
-
-<section> <!-- BEGIN References Slide -->
-  <h2>References</h2>
-  <ul>
-    <li><a
-        href="https://hub.pages.gitlab.us.lmco.com/incubator/mra/arise-user-guide/products/arise-msw-sk/arise-msw-wosa/arise-msw-wosa-overview.html#id2"
-        data-preview-link>Click for more WOSA info on the ARISE HUB</a></li>
-  </ul>
-</section> <!-- End References Slide -->
-
-<section> <!-- Last slide -->
-  <h2>Thank you</h2>
-  <p></p>
-  <h3 class="fragment fade-in">the end...?</h3>
-</section>
-
-</div>
-</div>
-
-  <script src="dist/reveal.js"></script>
-  <script src="plugin/zoom/zoom.js"></script>
-  <script src="plugin/notes/notes.js"></script>
-  <script src="plugin/search/search.js"></script>
-  <script src="plugin/markdown/markdown.js"></script>
-  <script src="plugin/highlight/highlight.js"></script>
+  <!--  GitLab flow -->
   <script>
+    const startAnimation = (entries, observer) => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle(".rotate", entry.isIntersecting);
+      });
+    };
+
+    const observer = new IntersectionObserver(startAnimation);
+    const options = { root: null, rootMargin: '0px', threshold: 1 };
+
+    const elements = document.querySelectorAll('i');
+    elements.forEach(el => {
+      observer.observe(el, options);
+    });
+  </script>
+  <style>
+    @-moz-keyframes spin {
+      to {
+        -moz-transform: rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .spin {
+      animation: spin 2s ease-in-out 0.5s 1;
+    }
+  </style>
+  <!--  GitLab flow -->
+  <section>
+    <h2>GitLab flow <i class="fa-solid fa-arrows-spin spin"></i></h2>
+    <a href="https://about.gitlab.com/blog/2023/07/27/gitlab-flow-duo/">
+      <img style="width: 800px"
+        src="https://about.gitlab.com/images/blogimages/gitlab-flow-duo/The-GitLab-Flow-2023-feedback-loops.png"></a>
+    <aside class="notes">
+      <ul>
+        <li>Recommended end-to-end workflow for the development lifecycle of applications in GitLab (we use portions of
+          it)</li>
+        <li>Outer feedback loop: product organization and risk management</li>
+        <li>Inner feedback loop: software development and code quality</li>
+        <li>Also can look moving left to right from planning, to implementation, to release</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- GitLab Git features plus more -->
+  <section>
+    <h2> <i style="color: #fc6d26" class="fa-brands fa-gitlab fa-sm fa-fw"></i> <i style="color: var(--r-link-color);"
+        class="fa-solid fa-heart fa-xs"></i> <i style="color: #f1502f;" class="fa-brands fa-git-alt"></i></h2>
+    <p><em>All the <code>git</code> features you love(?) and more!</em></p>
+    <ul>
+      <li class="fragment fade-in-then-semi-out"><code>commit</code>, <code>push</code>, <code>pull</code>,
+        <code>clone</code>, <code>merge</code>, <code>branch</code>, <code>tag</code>, …</li>
+      <li class="fragment fade-in-then-semi-out">Web IDE with built-in <code>git</code> client based on VS Code</li>
+      <li class="fragment fade-in-then-semi-out">Planning, execution, and release management</li>
+      <li class="fragment fade-in-then-semi-out">Docker image and package registries</li>
+      <li class="fragment fade-in-then-semi-out">Wiki and static website hosting</li>
+    </ul>
+    <aside class="notes">
+      <ul>
+        <li>Here are some other useful features of GitLab that a lot of LM teams use every day</li>
+        <li>There's an equivalent operation in GitLab for all common git operations</li>
+        <li>Whether developing from the command line locally, or within the Web IDE</li>
+        <li>Supports project management through planning, execution, release</li>
+        <li>A registry to store docker images and released packages</li>
+        <li>A place to host and make your documentation website viewable to others</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section>
+    <h2> GitLab <i style="color: var(--r-link-color);" class="fa-solid fa-right-left fa-xs"></i> Jira </h2>
+    <p><em>Jira issue integration</em></p>
+    <ul>
+      <li class="fragment custom blur">Mention a Jira issue to create a link</li>
+      <li class="fragment custom blur">Commit message integration for Jira issues</li>
+      <li class="fragment custom blur">GitLab branch creation from a Jira issue</li>
+      <li class="fragment custom blur">Create a Jira issue for a SAST finding</li>
+    </ul>
+    <aside class="notes">
+      <ul>
+        <li>Many LM teams use Jira to manage projects. There is Jira integration in GitLab.</li>
+        <li>Mostly in the form of issue cross-referencing</li>
+        <li>We don't use this too much but it's good to know about it</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- GitLab @ LM -->
+  <section>
+    <h2><i class="fa fa-gitlab" style="color: #fc6d26"></i> @ Lockheed Martin</h2>
+    <div class="fragment">
+      <ul>
+        <li>GitLab Ultimate Edition v16.2.x</li>
+        <li><a href="gitlab.us.lmco.com"><code>gitlab.us.lmco.com</code><img src="images/link.png" class="ext"></a></li>
+        <li><a href="https://lmco.enterprise.slack.com/archives/CJHQ8UD3P"><i class="fa fa-slack"></i> #help-gitlab<img
+              src="images/link.png" class="ext"></a></li>
+        <li><a href="https://mfc-swf.us.lmco.com/docs/training/pipeline-guide-course">SWF pipeline guide course<img
+              src="images/link.png" class="ext"></a></li>
+      </ul>
+    </div>
+    <aside class="notes">
+      <ul>
+        <li>We have GitLab ultimate so any feature you see on their website should be available</li>
+        <li>LM stays pretty close to updated with the latest</li>
+        <li>The slack channel is still pretty active, not yet moved to teams afiak</li>
+        <li>SWF provides a nice interactive pipeline guide course if you haven't seen it</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- GitLab project repos (everything as code) -->
+  <section>
+    <h2>GitLab repositories</h2>
+    <p><em>"Everything as code"</em></p>
+    <ul style="list-style: none;">
+      <li class="fragment fade-in-then-semi-out"><i style="color: #0db7ed" class="fa-brands fa-docker fa-xs fa-fw"></i>
+        Infrastructure (Docker, Ansible)</li>
+      <li class="fragment fade-in-then-semi-out"><i style="color: #3dae2b"
+          class="fa-solid fa-file-code fa-xs fa-fw"></i> Build system configuration (CMake)</li>
+      <li class="fragment fade-in-then-semi-out"><i style="color: #2c4aa8" class="fa-solid fa-book fa-xs fa-fw"></i>
+        Documentation (Doxygen, Sphinx)</li>
+      <li class="fragment fade-in-then-semi-out"><i style="color: #fc6d26" class="fa-brands fa-gitlab fa-xs fa-fw"></i>
+        Pipeline scripts (GitLab CI)</li>
+      <li class="fragment fade-in-then-semi-out"><i style="color: #f2e142"
+          class="fa-solid fa-person-chalkboard fa-xs fa-fw"></i> This presentation (HTML, CSS)</li>
+    </ul>
+    <aside class="notes">
+      <ul>
+        <li>Another common theme in DevSecOps is "everything as code"</li>
+        <li>Since GitLab projects are git repositories, we can adhere to this principle</li>
+        <li>EaC enforces version control and helps with maintainability</li>
+        <li>Some examples of "everything as code" as it relates to tools you have used</li>
+      </ul>
+    </aside>
+  </section>
+
+</section> <!-- END GitLab overview vertical section -->
+
+<section> <!-- BEGIN GitLab CI/CD Pipelines section -->
+  <!-- CI/CD pipelines overview -->
+  <section>
+    <h2>CI/CD pipeline overview</h2>
+    <ul>
+      <li class="fragment fade-in"><strong>Jobs</strong>: define <em>what</em> to do</li>
+      <li class="fragment fade-in"><strong>Stages</strong>: define <em>when</em> to do jobs</li>
+      <li class="fragment fade-in"><strong>Runners</strong>: define <em>where</em> to execute jobs</li>
+    </ul>
+    <aside class="notes">
+      <ul>
+        <li>I keep mentioning pipelines, so let's take closer look at what that means</li>
+        <li>A pipeline is made up of several components at a high level</li>
+        <li>Jobs are the smallest unit of work where you define a task to perform (can specify the order)</li>
+        <li>Stages can contain 1 or more jobs (can specify the order)</li>
+        <li>Runners can be physical hardware, Docker runner in the cloud (can specify or autoselected)</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- GitLab CI/CD details -->
+  <section>
+    <h2>CI/CD pipeline highlights</h2>
+    <ul>
+      <li class="fragment fade-in-then-semi-out">Configure using YAML file(s)</li>
+      <li class="fragment fade-in-then-semi-out">Execute jobs in parallel via multiple runners</li>
+      <li class="fragment fade-in-then-semi-out">Immediate visual feedback of progress</li>
+      <li class="fragment fade-in-then-semi-out">Automatic, manual, scheduled triggers</li>
+      <li class="fragment fade-in-then-semi-out">Push to image and package registries</li>
+      <li class="fragment fade-in-then-semi-out">Publish and serve static websites</li>
+    </ul>
+    <aside class="notes">
+      <ul>
+        <li>Here are some important features of pipelines</li>
+        <li>In GiLab, YAML is the markup language we use to write the config files</li>
+        <li>Jobs can be configured to run in parallel to save time, using multiple runners</li>
+        <li>You can check progress via logs or the web UI</li>
+        <li>Pipelines can be triggered automatically on git push, manually, or on a schedule</li>
+        <li>You can push images and packages to registries from within a pipeline</li>
+        <li>You can publish websites to external servers or within GitLab</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- Simple .gitlab-ci.yml example -->
+  <section data-auto-animate>
+    <h2>Simple(st) CI/CD pipeline</h2>
+    <p>Deploying an HTML website</p>
+    <pre><code class="hljs yaml" data-trim data-line-numbers="|1|3|4|5-6|7-9"><script type="text/template">
+          image: harbor.global.lmco.com/ext.hub.docker.com/library/alpine
+
+          pages:
+            stage: deploy
+            script:
+              - mv reveal.js public
+            artifacts:
+              paths:
+                - public
+					</script></code></pre>
+    <aside class="notes">
+      <ul>
+        <li>This is one of the most simple CI/CD pipelines, it actually publishes this presentation as a website</li>
+        <li>image: using alpine because it's the smallest available and has least dependencies</li>
+        <li>pages: this is the only job in the file</li>
+        <li>The job belongs to the deploy stage, the only stage in the file (default could be assigned if omitted)</li>
+        <li>The script tag is required, it lists the instructions to perform (in a bash environment)</li>
+        <li>artifacts is a way to expose files outside of this job. In this case it's required by GL Pages</li>
+      </ul>
+    </aside>
+  </section>
+  <section data-auto-animate>
+    <h2>Simple(st) CI/CD pipeline</h2>
+    <img style="width: 600px" src="images/pipeline1.png">
+    <aside class="notes">
+      <ul>
+        <li>And here is the visual feedback that I mentioned. You can see all jobs succeeded.</li>
+        <li>Note: the pages:depoy is autogenerated by GitLab when it detects a Pages job</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- Simple .gitlab-ci.yml example 2 -->
+  <section data-auto-animate>
+    <h2>Simple CI/CD pipeline</h2>
+    <p>Parallel jobs</p>
+    <pre><code class="hljs yaml" data-trim data-line-numbers="|1-4|6-9|11-15|17-20"><script type="text/template">
+          build-job:
+            stage: build
+            script:
+              - echo "Hello, $GITLAB_USER_LOGIN!"
+
+          test-job1:
+            stage: test
+            script:
+              - echo "This job tests something"
+
+          test-job2:
+            stage: test
+            script:
+              - echo "This job tests something, but takes more time than test-job1."
+              - sleep 20
+
+          deploy-prod:
+            stage: deploy
+            script:
+              - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+					</script></code></pre>
+    <aside class="notes">
+      <ul>
+        <li>Here is another simple pipeline to show how 2 jobs can be executed in parallel</li>
+        <li>(step to test job 1 and 2). These jobs belong to the same stage, will be run together (unless any
+          dependencies are defined)</li>
+      </ul>
+    </aside>
+  </section>
+  <section data-auto-animate>
+    <h2>Simple CI/CD pipeline</h2>
+    <img style="width: 600px" src="images/pipeline2.png">
+    <aside class="notes">
+      <ul>
+        <li>Here is the visual representation of parallel jobs being executed</li>
+      </ul>
+    </aside>
+  </section>
+</section> <!-- END GitLab CI/CD Pipelines section -->
+
+<section> <!-- BEGIN Reusable pipeline section -->
+  <!-- Reusable Pipeline Techniques/Resources -->
+  <section data-auto-animate data-auto-animate-restart>
+    <h2>Efficient pipelines</h2>
+    <p><strong>Techniques</strong></p>
+    <ul>
+      <li class="fragment fade-in-then-semi-out">Modular: the <code>include</code> keyword</li>
+      <li class="fragment fade-in-then-semi-out">Parallel jobs: the <code>parallel:matrix</code> keywords</li>
+      <li class="fragment fade-in-then-semi-out">Downstream pipelines: the <code>trigger</code> keyword</li>
+      <li class="fragment fade-in-then-semi-out">Speed: small and specialized Docker images</li>
+    </ul>
+    <aside class="notes">
+      <ul>
+        <li>Here are some way to make pipelines more efficient.</li>
+        <li>From the perspective of GitLab and the gitlab-ci yaml file, Include statements allow modularization and
+          promote reuse. Include statements can also introduce complexity without cluttering your .gitlab-ci file (split
+          into files)</li>
+        <li>Jobs can be parallelized based on parameters you define, can form a cartesian product of all possibilities
+        </li>
+        <li>Downstream pipelines allow triggering another pipeline within or outside your project</li>
+        <li>Since we are running jobs on docker images, smaller images put less load on gitlab runners</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section data-auto-animate>
+    <h2>Reusable pipelines</h2>
+    <p><strong>Resources</strong></p>
+  </section>
+  <section data-auto-animate>
+    <h2>Reusable pipelines</h2>
+    <p><strong>Resources</strong></p>
+    <ul>
+      <li><a href="https://pipeline-catalog.global.lmco.com">Software Factory Pipeline Catalog<img src="images/link.png"
+            class="ext"></a></li>
+      <li><a
+          href="https://gitlab.us.lmco.com/hub/incubator/mra/shared-repository-infrastructure/arise-pipeline-factory">ARISE
+          Pipeline Factory<img src="images/link.png" class="ext"></a></li>
+      <li><a href="https://docs.gitlab.com/ee/ci/examples/#cicd-templates">GitLab CI Templates<img src="images/link.png"
+            class="ext"></a> and <a href="https://docs.gitlab.com/ee/topics/autodevops/">Auto DevOps<img
+            src="images/link.png" class="ext"></a></li>
+    </ul>
+    <aside class="notes">
+      <ul>
+        <li>We have a couple resources for pipeline reuse here at LM</li>
+        <li>At a corporate level, the SWF pipeline catalog is a great starting point to stand up pipelies for projects
+          in various languages</li>
+        <li>The ARISE pipeliene factory is heavily used by ARISE adopters including HALO. The APF uses the SWF catalog
+          where possible.</li>
+        <li>GitLab also provides some pre-made templates and a feature called AutoDevops (image building, security
+          scanning, code quality, deployment)</li>
+        <li>The latter is not used much at LM in favor of homegrown solutions</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- Pipeline reuse .gitlab-ci.yml example -->
+  <section>
+    <h2>Reusablity in practice</h2>
+    <p><a href="https://gitlab.us.lmco.com/hub/incubator/mra/cofp/-/blob/develop/.gitlab-ci.yml#L19">ARISE Generic
+        Reference OFP<img src="images/link.png" class="ext"></a></p>
+    <pre><code class="hljs yaml" data-trim><script type="text/template">
+          include:
+            - project: hub/incubator/mra/shared-repository-infrastructure/arise-pipeline-factory
+              ref: v0.8.32
+              file: 'tools/gitlab-ci/msw_modules/pipeline.yml'
+
+          # Override jobs below
+					</script></code></pre>
+    <a
+      href="https://gitlab.us.lmco.com/hub/incubator/mra/shared-repository-infrastructure/arise-pipeline-factory/-/blob/v0.8.32/tools/gitlab-ci/msw_modules/pipeline.yml">pipeline.yml<img
+        src="images/link.png" class="ext"></a>,
+    <a href="https://gitlab.us.lmco.com/hub/incubator/mra/cofp/-/pipelines/5518956">Pipeline output<img
+        src="images/link.png" class="ext"></a>
+    <aside class="notes">
+      <ul>
+        <li>Reusable pipelines rely on include statements</li>
+        <li>Introduce complexity without cluttering your .gitlab-ci file</li>
+        <li>Show complexity of included file and the further included files</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- What's next? -->
+  <section>
+    <h2>What comes next?</h2>
+    <ul style="list-style: none">
+      <li><i class="fa-solid fa-book-open-reader fa-xs fa-fw"></i> Read the GitLab CI/CD <a
+          href="https://docs.gitlab.com/ee/ci/yaml/">reference<img src="images/link.png" class="ext"></a> and <a
+          href="https://docs.gitlab.com/ee/ci/quick_start/">tutorials<img src="images/link.png" class="ext"></a></li>
+      <li><i class="fa-solid fa-graduation-cap fa-xs fa-fw"></i> Take the <a
+          href="https://mfc-swf.us.lmco.com/docs/training/pipeline-guide-course">SWF pipeline guide course<img
+            src="images/link.png" class="ext"></a></li>
+      <li><i class="fa-solid fa-signs-post fa-xs fa-fw"></i> Check the ARISE Pipeline Factory <a
+          href="https://mfc-jira-prd.us.lmco.com:8443/issues/?jql=project%20%3D%20ARISE%20AND%20issuetype%20%3D%20Story%20AND%20status%20in%20(%22In%20Progress%22%2C%20Backlog)%20AND%20Product%20%3D%20Product-Support">roadmap<img
+            src="images/link.png" class="ext"></a></li>
+      <li><i class="fa-solid fa-binoculars fa-xs fa-fw"></i> Explore other CI/CD solutions
+        <ul style="list-style: none;">
+          <li><i class="fa-solid fa-caret-right fa-2xs fa-fw"></i> Jenkins, GitHub Actions, CircleCI, Azure</li>
+        </ul>
+    </ul>
+    <aside class="notes">
+      <ul>
+        <li>Extensive documentation on GitLab's site</li>
+        <li>GitLab isn't the only CI/CD platform</li>
+      </ul>
+    </aside>
+  </section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+    <script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
 
   // Also available as an ES module, see:
   // https://revealjs.com/initialization/
-  Reveal.initialize({
-      controls: true,
-      controlsTutorial: true,
-      progress: true,
-      center: true,
-      hash: true,
-      slideNumber: true,
+			Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+				hash: true,
+        slideNumber: true,
 
-      // The "normal" size of the presentation, aspect ratio will
-      // be preserved when the presentation is scaled to fit different
-      // resolutions. Can be specified using percentage units.
-      width: 1260,
-      height: 700,
+				// Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+			});
 
-      // Factor of the display size that should remain empty around the content
-      margin: 0.02,
-
-      // Bounds for smallest/largest possible scale to apply to content
-      minScale: 0.2,
-      maxScale: 2.0,
-
-      // Learn about plugins: https://revealjs.com/plugins/
-      plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
-    });
-
-</script>
-  </body>
-
+		</script>
+	</body>
 </html>
