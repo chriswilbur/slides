@@ -42,11 +42,10 @@
 
   <body>
     <div class="reveal">
-      <div class="slides">
-        <!-- Title slide -->
-        <section>
+      <div class="slides"><!-- Title slide -->
+        <section data-transition="slide">
           <h2>Engineering Concepts</h2>
-          <p><small>Presented by <a href="mailto:crswlbr@gmail.com">Chris Wilbur</a></small></p>
+          <p><small>Presented by Chris Wilbur</a></small></p>
           <aside class="notes">
             <ul>
               <li>This presentation will cover the basics of Engineering Concepts</li>
@@ -56,26 +55,24 @@
           </aside>
         </section>
 
-        <!-- Draw This ... 1-->
-        <section>
-          <h2>Draw This...1</h2>
+        <!-- Draw This -->
+        <section data-transition="slide"> <!-- #2 -->
+          <div><h2>Draw This</h2></div>
           <ul>
-            <li class="fragment custom blur">a rectangle with a red sqauare in the middle</li>
-            <li class="fragment custom blur">put it in the bottom left of the page and make it purple</li>
-            <li class="fragment custom blur">add a yellow moon in the top right corner</li>
+            <li class="fragment custom blur" style="font-size: 80%;">a rectangle with a red sqauare in the middle</li>
+            <li class="fragment custom blur" style="font-size: 80%;">put it in the bottom left of the page and make it purple</li>
+            <li class="fragment custom blur" style="font-size: 80%;">add a yellow moon in the top right corner</li>
           </ul>
         </section>
 
         <!-- Image 1 -->
-        <section data-auto-animate style="height: 600px">
-          <h4>Does your drawing look like this?</h4>
-          <p>
-            <ul>
-              <li style="font-size: 60%;">a rectangle with a red sqauare in the middle</li>
-              <li style="font-size: 60%;">put it in the bottom left of the page and make it purple</li>
-              <li style="font-size: 60%;">add a yellow moon in the top right corner</li>
-            </ul>
-          </p>
+        <section data-transition="slide"> <!-- #3 -->
+          <div><h4>Does your drawing look like this?</h4></div>
+          <ul>
+            <li style="font-size: 60%;">a rectangle with a red sqauare in the middle</li>
+            <li style="font-size: 60%;">put it in the bottom left of the page and make it purple</li>
+            <li style="font-size: 60%;">add a yellow moon in the top right corner</li>
+          </ul>
           <h2 data-id="title" style="margin-top: 500px; opacity: 0;">With Auto Animate</h2>
           <div data-id="1" style="background: rgba(255, 253, 255, 0.596); position: absolute; top: 200px; left: 235px; width: 500px; height: 475px;"></div>
           <div data-id="1" style="background: rgba(255, 0, 255, 0.596); position: absolute; top: 460px; left: 250px; width: 380px; height: 200px;"></div>
@@ -83,9 +80,9 @@
           <div data-id="4" style="background: yellow; position: absolute; top: 325px; left: 700px; width: 100px; height: 100px; margin: -100px 0 0 -100px; border-radius: 400px;"></div>
         </section>
 
-        <!-- Draw This ... 2-->
-        <section>
-          <h2>Draw This ...2</h2>
+        <!-- Draw This-->
+        <section data-transition="slide"> <!-- #4 -->
+          <h2>Draw This</h2>
           <ul>
             <li class="fragment custom blur">a gray cat with glasses</li>
             <li class="fragment custom blur">with a laptop</li>
@@ -99,9 +96,9 @@
             </ul>
           </aside>
         </section>
-        
+
         <!-- Image 2 -->
-        <section data-auto-animate style="height: 600px">
+        <section data-transition="slide"> <!-- #5 -->
           <h4>Does your drawing look like this?</h4>
           <p>
             <ul>
@@ -111,12 +108,12 @@
               <li style="font-size: 60%;">with a twinkling lightbulb above it's head as if to say "Ah Ha!"</li>
             </ul>
           </p>
-          <img src="examples\assets\idea.png"  height="200" width="200">
+          <img src="examples/assets/coding.png"  height="200" width="200">
         </section>
 
-        <!-- Draw This ... 3-->
-        <section>
-          <h2>Draw This...3</h2>
+        <!-- Draw This-->
+        <section data-transition="slide"> <!-- #6 -->
+          <h2>Draw This</h2>
           <ul>
             <li class="fragment custom blur">A big mean duck</li>
             <li class="fragment custom blur">with the word "Pathetic" floating above it's head</li>
@@ -131,7 +128,7 @@
         </section>
 
         <!-- Image 3 -->
-        <section data-auto-animate style="height: 600px">
+        <section data-transition="slide"> <!-- #7 -->
           <h4>Does your drawing look like this? ...3</h4>
           <p>
             <ul>
@@ -144,11 +141,9 @@
         </section>
 
         <!-- Group work -->
-        <section>
-          <h3>Customer + Artist</h3>
-          <ul>
-            <li>The customer describes the image to the artist while the artist has to do their best to draw what is described (no peeking).</li>
-          </ul>
+        <section data-transition="slide"> <!-- #8 -->
+          <h3>Group work: <div style="display: inline-block; color: #F8F8F2;">Customer + Artist</div></h3>
+          <p>Pair up and take turns playing the customer and artist. The customer describes an image to the artist while the artist has to do their best to draw what is described (no peeking).</p>
 
           <aside class="notes">
             <ul>
@@ -158,148 +153,259 @@
           </aside>
         </section>
 
-        <section>
-          <h3>Discussion</h3>          
+        <!-- Discussion -->
+        <section data-transition="slide"> <!-- #9 -->
+          <h3>Discussion</h3>
           <ul>
-            <li class="fragment fade-in-then-semi-out">What did you think?</li>
             <li class="fragment fade-in-then-semi-out">How difficult was it?</li>
-            <li class="fragment fade-in-then-semi-out">What made it easier or harder?</li>
-            <li class="fragment fade-in-then-semi-out">What do you think would make it easier?</li>
-            <li class="fragment fade-in-then-semi-out">But, what if ...</li>
+            <li class="fragment fade-in-then-semi-out">What were some of the things we did to make it easier or harder?</li>
+            <li class="fragment fade-in-then-semi-out">Can you think of anything that could make it easier?</li>
           </ul>
+          <aside class="notes">
+            <ul>
+              <li>Have student fill out sticky notes with suggested improvements ways to do the task</li>
+              <li>What about other tasks?</li>
+            </ul>
+          </aside>
         </section>
 
-        <!-- I want lunch -->
-        <!-- christie -->
-        <section data-auto-animate data-auto-animate-unmatched="fade">
+        <!-- I want lunch - christie -->
+        <section data-auto-animate data-auto-animate-unmatched="fade"> <!-- #10 -->
           <h3>...I want lunch.</h3>
           <div class="fragment fade-in" data-id="nom" style="display: inline-block;">Christie</div>
           <p>
             <img class="fragment fade-in" src="examples/assets/veggies.jfif" height="300" >
           </p>
+          <aside class="notes">
+            <ul>
+              <li>when I want lunch, I have a number of options... </li>
+              <li>I can ask my wife </li>
+            </ul>
+          </aside>
         </section>
-        <!-- halle -->
-        <section data-auto-animate data-auto-animate-unmatched="fade">
+
+        <!-- I want lunch - halle -->
+        <section data-auto-animate data-auto-animate-unmatched="fade"> <!-- #11 -->
           <h3>...I want lunch.</h3>
-          <div class="fragment fade-in" data-id="nom" style="display: inline-block;">Halle</div>
+          <div data-id="nom" style="display: inline-block;">Halle</div>
           <p>
-            <img class="fragment fade-in" src="examples/assets/donuts.jfif" height="300" >
+            <img src="examples/assets/donuts.jfif" height="300" >
           </p>
+          <aside class="notes">
+            <ul>
+              <li>I can ask my daughter </li>
+            </ul>
+          </aside>
         </section>
-        <!-- higgins -->
-        <section data-auto-animate data-auto-animate-unmatched="fade">
+
+        <!-- I want lunch - higgins -->
+        <section data-auto-animate data-auto-animate-unmatched="fade"> <!-- #12 -->
           <h3>...I want lunch.</h3>
-          <div class="fragment fade-in" data-id="nom" style="display: inline-block;">Higgins</div>
+          <div data-id="nom" style="display: inline-block;">Higgins</div>
           <p>
-            <img class="fragment fade-in" src="examples/assets/Higgins_with_toy.jpeg" height="300" >
+            <img src="examples/assets/Higgins_with_toy.jpeg" height="300" >
           </p>
+          <aside class="notes">
+            <ul>
+              <li>I can even ask my cute little doggie, Higgins </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- I want lunch - all -->
+        <section data-auto-animate data-auto-animate-unmatched="fade-in fade-out"> <!-- #13 -->
+          <h3>But who should I ask? </h3>
+          <div data-id="nom" style="display: inline-block;">
+            <img src="examples/assets/veggies.jfif" height="300" >
+            <img src="examples/assets/donuts.jfif" height="300" >
+            <img src="examples/assets/Higgins_with_toy.jpeg" height="300" >
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>I get a different result based on who I ask</li>
+            </ul>
+          </aside>
         </section>
 
         <!-- What if it was harder? -->
-        <section data-auto-animate data-auto-animate-unmatched="fade">
-          <h3>What if <a style="color: #282A36 ">...it was harder?</a></h3>
-          <aside class="notes">
-            <ul>
-              <li>most of us could probably make a lean-to or tent cover thing... </li>
-              <li>it might last for a day or two</li>
-              <li>but what if I needed a house, or a building? a car? a spaceship?</li>
-              <li>With increasing complexity and importance of safety comes the need for engineers</li>
-            </ul>
-          </aside>
+        <section>
+          <section data-auto-animate> <!-- #14.1 -->
+            <h3>What if <a style="color: #282A36 ">...it was a bit harder?</a></h3>
+            <a href="#/2/1" class="navigate-down">
+							<img class="r-frame" style="opacity: 0.1; background: rgba(255,255,255,0.1);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Down arrow">
+						</a>
+            <aside class="notes">
+              <ul>
+                <li>What if what you need to make is a bit more difficult than a drawing?</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section data-auto-animate> <!-- #14.2 -->
+            <h3>What if<a style="color: #d3baf5ef ">...it was harder?</a></h3>
+            <p >
+              <img src="examples/assets/cardboard_bridge.webp" height="500" style="opacity: 0;">
+            </p>
+            <aside class="notes">
+              <ul>
+                <li>most of us could probably make stuff out of cardboard </li>
+                <li>but what about a bridge?</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section data-auto-animate> <!-- #14.3 -->
+            <h3><div style="display: inline-block; opacity: 0.2;">What if</div><a style="color: #d3baf5ef; opacity: 0.2; ">...it was </a><a style="color: #d3baf5ef; opacity: 0.2; ">harder?</a></h3>
+            <p>
+              <img src="examples/assets/cardboard_bridge.webp" height="500">
+            </p>
+            <aside class="notes">
+              <ul>
+                <li>no... like a real bridge</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section data-auto-animate> <!-- #14.4 -->
+            <h3><div style="display: inline-block; opacity: 0.2;">What if</div><a style="color: #d3baf5ef; opacity: 0.2; ">...it was </a><a style="color: #d3baf5ef; opacity: 0.5; ">harder?</a></h3>
+            <p>
+              <img class="fragment fade-in-then-out" src="examples/assets/cardboard_bridge_1.jpg" height="500" >
+            </p>
+            <aside class="notes">
+              <ul>
+                <li>yea... but one that can hold people</li>
+              </ul>
+            </aside>
+          </section>
+
+          <!-- what if it was harder? 2 -->
+          <section data-auto-animate> <!-- #14.5 -->
+            <h3><div style="display: inline-block; opacity: 0.2;">What if</div><a style="color: #d3baf5ef; opacity: 0.2; ">...it was </a><a style="color: #d3baf5ef; opacity: 0.9; ">harder?</a></h3>
+            <p>
+              <img class="fragment fade-in-then-out" src="examples/assets/Pedestrian-bridge-scaled.webp" height="500" >
+            </p>
+            <aside class="notes">
+              <ul>
+                <li>More people</li>
+              </ul>
+            </aside>
+          </section>
+
+          <!-- what if it was harder? 2 -->
+          <section data-auto-animate data-auto-animate-unmatched="fade"> <!-- #14.6 -->
+            <h3><div style="display: inline-block; opacity: 0.2;">What if</div><a style="color: #d3baf5ef; opacity: 0.2;">...it was </a><a style="color: #d3baf5ef;">harder?</a></h3>
+            <p>
+              <img class="fragment fade-in-then-out" src="examples/assets/Gardon-River-Bridge-By-Didier-Boy-de-la-Tour-.jpg" height="500" >
+            </p>
+          </section>
+          
+          <section data-background="examples/assets/Gardon-River-Bridge-By-Didier-Boy-de-la-Tour-.jpg" > <!-- #14.7 -->
+            <h2><div style="display: inline-block; color: #282A36; position: relative; bottom: 250px;">What if...it was harder?</div></h2>
+            <aside class="notes">
+              <ul>
+                <li>Japanese architect, Shigeru Ban</li>
+                <li>Gardon River in France.</li>
+                <li>281 cardboard tubes</li>
+                <li>can carry 20 people at a time</li>
+                <li>wooden boxes filled with sand for the foundation</li>
+                <li>Only made possible through the practice of Engineering.</li>
+              </ul>
+            </aside>
+          </section>
+          
+          <section data-background-iframe="https://www.goodnewsnetwork.org/ultra-strong-bridges-made-of-cardboard-inspires-shelter-design/" > <!-- #14.8 -->
+            <aside class="notes">
+              <ul>
+                <li>Japanese architect, Shigeru Ban</li>
+                <li>Gardon River in France.</li>
+                <li>281 cardboard tubes</li>
+                <li>can carry 20 people at a time</li>
+                <li>wooden boxes filled with sand for the foundation</li>
+                <li>Only made possible through the practice of Engineering.</li>
+              </ul>
+            </aside>
+          </section>
+
         </section>
 
-        <!-- what if it was harder? 2 -->
-        <section data-auto-animate data-auto-animate-unmatched="fade">
-          <h3>What if <a style="color: #d3baf5ef ">...it was harder?</a></h3>
-          <aside class="notes">
-            <ul>
-              <li>most of us could probably make a lean-to or tent cover thing... </li>
-              <li>it might last for a day or two</li>
-              <li>but what if I needed a house, or a building? a car? a spaceship?</li>
-              <li>With increasing complexity and importance of safety comes the need for engineers</li>
-            </ul>
-          </aside>
-        </section>
-
-        <!-- 14 -->
-        <section data-auto-animate>
+        <!-- #15 -->
+        <section data-transition="slide">
           <h3>Engineering</h3>
-          <h8 class="fragment fade-in" >The use of <div data-id="nat_sci" style="display: inline-block; color: var(--r-bold-color);">natural sciences</div>, <div data-id="math" style="display: inline-block;color: var(--r-bold-color);">mathematics</div>, and the <div data-id="edp" style="display: inline-block;color: var(--r-bold-color);">Engineering Design Process</div> to solve problems and make things better.</h8>
+          <h8>The use of <div data-id="nat_sci" style="display: inline-block; color: var(--r-bold-color);">natural sciences</div>, <div data-id="math" style="display: inline-block;color: var(--r-bold-color);">mathematics</div>, and the <div data-id="edp" style="display: inline-block;color: var(--r-bold-color);">Engineering Design Process</div> to solve problems and make things better.</h8>
           <p><div data-id="nom" style="display: inline-block; color: #282A36 ">Natural Sciences</div></p>
           <p style="font-size: smaller; color: #282A36 ">The science of the physical world: chemistry, biology, physics.</p>
+          <aside class="notes">
+            <ul>
+              <li>What is engineering</li>
+              <li>emphasize that the goal is to solve problems and make things better</li>
+            </ul>
+          </aside>
         </section>
 
-        <!-- 15 -->
-        <section data-auto-animate>
+        <!-- #16 -->
+        <section data-transition="slide">
           <h3>Natural Sciences</h3>
-          <!-- <h3>Engineering : <div data-id="nom" style="display: inline-block; font-size: smaller; color: #FFB86C;">Natural Sciences</div></h3> -->
           <p><div data-id="nom" style="display: inline-block;">The science of the physical world: chemistry, biology, physics.</div></p>
-          <!-- <p class="fragment fade-in" style="font-size: smaller;">The science of the physical world: chemistry, biology, physics.</p> -->
         </section>
-        
-        <!-- 16 -->
-        <section data-auto-animate>
+
+        <!-- #17 -->
+        <section data-transition="slide">
           <h3>Mathematics</h3>
-          <!-- <h3>Engineering : <div data-id="nom" style="display: inline-block; font-size: smaller; color: #FFB86C;">Mathematics</div></h3> -->
           <p><div data-id="nom" style="display: inline-block;">The abstract science of numbers, quantities, and space.</div></p>
-          <!-- <p class="fragment fade-in" style="font-size: smaller;">The abstract science of numbers, quantities, and space.</p> -->
         </section>
-        
-        <!-- 17 -->
-        <section data-auto-animate>
-          <h3>Engineering Design Process</h3>
-          <!-- <h3>Engineering : <div data-id="nom" style="display: inline-block; font-size: smaller; color: #FFB86C;">Engineering Design Process</div></h3> -->
+
+        <!-- #18 -->
+        <section data-transition="slide-in fade-out">
+          <h3><div data-id="nom2" style="display: inline-block;">Engineering Design Process</div></h3>
           <p><div data-id="nom" style="display: inline-block;">A logical set of specific steps used to solve problems.</div></p>
-          <!-- <p class="fragment fade-in" style="font-size: smaller;">A logical set of specific steps used to solve problems.</p> -->
         </section>
 
-
-        <!-- 18 -->
-        <section data-auto-animate>
-          <h3><div data-id="nom2" style="display: inline-block;">Engineering</div></h3>
-          <h8>The use of <div data-id="nat_sci" style="display: inline-block; color: var(--r-bold-color);">natural sciences</div>, <div data-id="math" style="display: inline-block;color: var(--r-bold-color);">mathematics</div>, and the <div data-id="edp" style="display: inline-block;color: var(--r-bold-color);">Engineering Design Process</div> to solve problems and make things better.</h8>
+        <!-- #19  -->
+        <section data-transition="fade-in slide-out">
+          <h3><div data-id="nom2" style="display: inline-block;">EDP</div></h3>
           <p>
-            <img src="examples/assets/EDPHub_Graphic.png">
+            <img src="examples/assets/EDPHub_Graphic.png" height="600">
           </p>
         </section>
-        
-        <!-- 19 -->
-        <section data-auto-animate>
-          <!-- <h8><div data-id="nom2" style="display: inline-block;">EDP</div></h8> -->
-          <p>
-            <img src="examples/assets/EDPHub_Graphic.png" height="650">
-          </p>
+
+        <!-- #20 -->
+        <section data-transition="slide" >
+          <img src="examples/assets/EDP_Image.jpeg" style="max-height:700px ">
+          <aside class="notes">
+            <ul>
+              <li>Using EDP, let's try another drawing.</li>
+              <li>todo: give specific instructions so everyone creates a very similar drawing.</li>
+              <li></li>
+              <li></li>
+              <li></li>
+
+            </ul>
+          </aside>
         </section>
-<!--         
-        <section data-auto-animate>
-          <h3>Engineering</h3>
-          <h8><div data-id="nat_sci" style="display: inline-block; color: var(--r-bold-color);">natural sciences</div>, <div data-id="math" style="display: inline-block;color: var(--r-bold-color);">mathematics</div>, and <div data-id="edp" style="display: inline-block;color: var(--r-bold-color);">Engineering Design Process</div></h8>
-          <ul>
-            <li class="fragment fade-in-then-semi-out"><div data-id="nat_sci" style="display: inline-block; color: var(--r-bold-color);">Natural Sciences</div><div class="fragment fade-in-then-semi-out" style="font-size: smaller;">The science of the physical world: chemistry, biology, physics</div></li>
-            <li class="fragment fade-in-then-semi-out"><div data-id="math" style="display: inline-block;color: var(--r-bold-color);">Mathematics</div><div class="fragment fade-in-then-semi-out" style="font-size: smaller;">The abstract science of numbers, quantities, and space.</div></li>
-            <li class="fragment fade-in-then-semi-out"><div data-id="edp" style="display: inline-block;color: var(--r-bold-color);">Engineering Design Process</div><div class="fragment fade-in-then-semi-out" style="font-size: smaller;">A logical set of specific steps used to solve problems.</div></li>
-           </ul>
-        </section> -->
 
-        <!-- <section data-auto-animate>
-          <h3>Engineering</h3> -->
-          <!-- <h8>The use of <div style="display: inline-block; color: var(--r-bold-color);">natural sciences</div>, <div style="display: inline-block;color: var(--r-bold-color);">mathematics</div>, and the <div style="display: inline-block;color: var(--r-bold-color);">Engineering Design Process</div> to solve problems and make things better.</h8> -->
-          <!-- <ul>
-           <li><div data-id="nat_sci" style="display: inline-block; color: var(--r-bold-color);">Natural Sciences</div><div class="fragment fade-in-then-semi-out" style="font-size: smaller;">The science of the physical world: chemistry, biology, physics</div></li>
-           <li><div data-id="math" style="display: inline-block;color: var(--r-bold-color);">Mathematics</div><div class="fragment fade-in-then-semi-out" style="font-size: smaller;">The abstract science of numbers, quantities, and space.</div></li>
-           <li><div data-id="edp" style="display: inline-block;color: var(--r-bold-color);">Engineering Design Process</div><div class="fragment fade-in-then-semi-out" style="font-size: smaller;">A logical set of specific steps used to solve problems.</div></li>
-          </ul> 
-          <ul>
-            <li class="fragment fade-in-then-semi-out" style="font-size: smaller;"><strong>Natural Sciences</strong>The science of the physical world: chemistry, biology, physics</li>
-            <li class="fragment fade-in-then-semi-out" style="font-size: smaller;"><strong>Mathematics</strong>The abstract science of numbers, quantities, and space.</li>
-            <li class="fragment fade-in-then-semi-out" style="font-size: smaller;"><strong>Engineering Design Process</strong>A logical set of specific steps used to solve problems.</li>
-           </ul>
-        </section> -->
+        <!-- #21 -->
+        <section>
 
-        
-        <section data-auto-animate>
-          <h3>Engineering</h3>
-          <h8>The use of natural sciences, mathematics, and the engineering design process to solve problems and make things better.</h8>
+          <section data-transition="slide-in" ><!-- #20.1 -->
+            <h3>Engineering</h3>
+            <h8>The use of natural sciences, mathematics, and the engineering design process to solve problems and make things better.</h8>
+          </section>
+
+          <section data-transition ><!-- #20.2 -->
+            <h3>Engineering</h3>
+            <h8>The use of <div style="display: inline-block; color: #FFB86C;">natural sciences</div>, mathematics, and the engineering design process to solve problems and make things better.</h8>
+          </section>
+
+          <section data-transition ><!-- #20.3 -->
+            <h3>Engineering</h3>
+            <h8>The use of <div style="display: inline-block; color: #FFB86C;">natural sciences</div>, <div style="display: inline-block; color: #FFB86C;">mathematics</div>, and the engineering design process to solve problems and make things better.</h8>
+          </section>
+
+          <section data-transition ><!-- #20.4 -->
+            <h3>Engineering</h3>
+            <h8>The use of <div style="display: inline-block; color: #FFB86C;">natural sciences</div>, <div style="display: inline-block; color: #FFB86C;">mathematics</div>, and the <div style="display: inline-block; color: #FFB86C;">engineering design process</div> to solve problems and make things better.</h8>
+          </section>
+          
         </section>
 
       </div>
@@ -321,6 +427,7 @@
         center: true,
         hash: true,
         slideNumber: true,
+        backgroundTransition: 'slide',
 
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
