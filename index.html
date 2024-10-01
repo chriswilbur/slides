@@ -56,6 +56,18 @@
           </aside>
         </section>
 
+        <section>
+          <section data-transition="slide">
+            <h2>Scientific Method</h2>
+            <p>Systemic approach to understanding our world through observation, experimentation, and analysis.</p>
+          </section>
+
+          <section data-transition="slide">
+            <h2>Engineering</h2>
+            <p>Using Science to solve problems and make things better.</p>
+          </section>
+        </section>
+
         <!-- Draw This -->
         <section data-transition="slide"> <!-- #2 -->
           <div><h2>Draw This</h2></div>
@@ -117,14 +129,12 @@
         <!-- Image 2 -->
         <section data-transition="slide"> <!-- #5 -->
           <h4>Does your drawing look like this?</h4>
-          <p>
-            <ul>
-              <li style="font-size: 60%;">a gray cat with glasses</li>
-              <li style="font-size: 60%;">sitting behind a laptop</li>
-              <li style="font-size: 60%;">with it's right front paw pointing up to the sky</li>
-              <li style="font-size: 60%;">and a twinkling lightbulb above it's head as if to say "Ah Ha!"</li>
-            </ul>
-          </p>
+          <ul>
+            <li style="font-size: 60%;">a gray cat with glasses</li>
+            <li style="font-size: 60%;">sitting behind a laptop</li>
+            <li style="font-size: 60%;">with it's right front paw pointing up to the sky</li>
+            <li style="font-size: 60%;">and a twinkling lightbulb above it's head as if to say "Ah Ha!"</li>
+          </ul>
           <img src="examples/assets/idea.png"  height="200" width="200">
           <aside class="notes">
             <ul >
@@ -138,11 +148,13 @@
         <!-- Draw This-->
         <section data-transition="slide"> <!-- #6 -->
           <h2>Draw This</h2>
-          <ul class="fragment custom blur">
-            <li>A big mean duck</li>
-            <li>with the word "Pathetic" floating above it's head</li>
-            <li>and make it look real judgmental</li>
-          </ul>
+          <p>
+            <ul class="fragment custom blur">
+              <li>A big mean duck</li>
+              <li>with the word "Pathetic" floating above it's head</li>
+              <li>and make it look real judgmental</li>
+            </ul>
+          </p>
           <aside class="notes">
             <ul>
               <li>What if I show you exactly what I want?</li>
@@ -154,12 +166,14 @@
         <!-- Image 3 -->
         <section data-transition="slide"> <!-- #7 -->
           <h4>Does your drawing look like this?</h4>
-          <ul>
-            <li style="font-size: 60%;">A big mean duck</li>
-            <li style="font-size: 60%;">with the word "Pathetic" floating above it's head</li>
-            <li style="font-size: 60%;">and make it look real judgmental</li>
-          </ul>
-          <img src="examples/assets/pathetic.jpeg" height="550" width="400">
+          <p>
+            <ul>
+              <li style="font-size: 60%;">A big mean duck</li>
+              <li style="font-size: 60%;">with the word "Pathetic" floating above it's head</li>
+              <li style="font-size: 60%;">and make it look real judgmental</li>
+            </ul>
+          </p>
+            <img src="examples/assets/pathetic.jpeg" height="550" width="400">
           <aside class="notes">
             <ul>
               <li>This image is only for emphasis, don't give time to attempt.</li>
@@ -352,7 +366,7 @@
               <p>arrow down for next slide</p>
             </aside>
           </section>
-          
+
           <section data-background="examples/assets/Gardon-River-Bridge-By-Didier-Boy-de-la-Tour-.jpg" > <!-- #14.7 -->
             <!-- <h2><div style="display: inline-block; color: #282A36; position: relative; bottom: 250px;">What if...it was harder?</div></h2> -->
             <aside class="notes">
@@ -366,7 +380,7 @@
               <p>arrow down for optional slide, or right to skip</p>
             </aside>
           </section>
-          
+
           <section data-background-iframe="https://www.goodnewsnetwork.org/ultra-strong-bridges-made-of-cardboard-inspires-shelter-design/" > <!-- #14.8 -->
             <aside class="notes">
               <ul>
@@ -380,7 +394,7 @@
           </section>
 
         </section>
-        
+
         <!-- #15 -->
         <section>
 
@@ -471,7 +485,7 @@
             </ul>
           </aside>
         </section>
-        
+
         <!-- #21 -->
         <section data-auto-animate >
           <img data-id="edpimg" style="float: right; max-height: 450px; " src="examples/assets/EDP_Image.jpeg">
@@ -494,7 +508,7 @@
             </ul>
           </aside>
         </section>
-        
+
         <!-- #22 -->
         <section data-auto-animate >
           <img data-id="edpimg" style="float: right; max-height: 450px; " src="examples/assets/EDP_Image.jpeg">
@@ -515,29 +529,6 @@
             </ul>
           </aside>
         </section>
-
-        
-        <!-- #21 -->
-        <!-- <section data-transition="slide" > 
-          <img style="float: left; max-height: 350px; " src="examples/assets/EDP_Image.jpeg"> 
-          <img style="float: right; max-height: 500px;" src="examples/assets/EDP-table.jpeg"> 
-
-          <ul  style="display: block; font-size: smaller;">
-            <li>Define the problem</li>
-            <li>Brainstorm </li>
-            <li>Select possible solution </li>
-            <li>Create : make a prototype </li>
-            <li>Experiment : test prototype .. does this actually fix the problem</li>
-            <li>Improve : Can we make it better? </li>
-            <li>Stress tha this is iterative and cyclic... Engineering is always trying to make it better, faster, cooler, etc...</li>
-            <li>Using EDP, let's try another drawing.</li>
-          </ul> 
-          <aside class="notes"> 
-            <ul> 
-              <li>...</li> 
-            </ul> 
-          </aside> 
-        </section> -->
 
 
         <!-- #22 -->
@@ -590,6 +581,7 @@
         hash: true,
         slideNumber: true,
         backgroundTransition: 'slide',
+        view: 'scroll',
 
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
